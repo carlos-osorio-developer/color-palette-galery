@@ -12,6 +12,7 @@ const config = {
   entry: './src/assets/js/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[hash][ext][query]'
   },
   devServer: {
     open: true,
@@ -19,7 +20,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: '/src/index.html',
+      template: './src/index.html',
     }),
 
     // Add your plugins here
@@ -43,7 +44,14 @@ const config = {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
         type: 'asset',
       },
-
+      {
+        test: /\.html$/,
+        use: ["html-loader"],
+      },                    
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource'
+      },      
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],
