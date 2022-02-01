@@ -1,13 +1,16 @@
 {
   "devDependencies": {
-    "@webpack-cli/generators": "^2.4.2",
-    "webpack": "^5.67.0",
-    "webpack-cli": "^4.9.2"
+    "@webpack-cli/generators": "^1.1.0",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.3"
   },
   "version": "1.0.0",
   "description": "My webpack project",
   "name": "my-webpack-project",
-  "type": "module",
   "scripts": {
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
@@ -16,7 +19,7 @@
     "serve": "webpack serve"
   },
   "dependencies": {
-    "node-fetch": "^3.2.0",
-    "regenerator-runtime": "^0.13.9"
+    "babel-loader": "^8.2.3",
+    "mini-css-extract-plugin": "^2.5.3"
   }
 }
