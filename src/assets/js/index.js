@@ -1,4 +1,4 @@
-import {newPalette, userAPI} from "./api";
+import { newPalette, userAPI } from './api';
 
-console.log("Hello World!");
-
+newPalette();
+userAPI.getLikes();
