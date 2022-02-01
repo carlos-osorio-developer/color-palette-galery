@@ -31,6 +31,26 @@ const userAPI = {
     const response = await fetch(`${userAPIurl}/${userAPIkey}/likes`);
     const data = await response.json();
     return data;
+  },
+
+  async postComment(itemId, user, comment) {    
+    const response = await fetch(`${userAPIurl}/${userAPIkey}/comments`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ 
+        "item_id": itemId,
+        "username": user.toLowerCase(),
+        "comment": comment 
+      })
+    });
+    const data = await response.text();
+    return data;
+  },
+
+  async getComments(itemId) {    
+    const response = await fetch(`${userAPIurl}/${userAPIkey}/comments?item_id=${itemId}`);
+    const data = await response.json();
+    return data;
   }
 }
 
