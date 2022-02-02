@@ -54,6 +54,35 @@ body {
     }    
   }
 
+  main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+    flex-wrap: wrap;
+    padding: 20px;
+
+    .palette-card {
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
+
+      .palette-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 0 0 10px 10px;
+       
+        .colors {
+          height: 20px; 
+          width: 80px;
+        }             
+      }
+    }
+  }
+
   footer {
     background-color: #271AB0;
 
