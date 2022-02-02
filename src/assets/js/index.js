@@ -10,9 +10,11 @@ const loadData = async () => {
   const main = document.getElementsByTagName('main')[0];
   for (let i = 0; i < 6; i++) {      
     const paletteCard = document.createElement('div');
-    paletteCard.classList.add('palette-card');  
-    const paletteContent = document.createElement('div');
-    paletteContent.classList.add('palette-content');
+    paletteCard.classList.add('palette-card'); 
+    const paletteHeader = document.createElement('div');
+    paletteHeader.classList.add('palette-header');
+    const paletteColors = document.createElement('div');
+    paletteColors.classList.add('palette-colors');
 
     const response = await newPalette();
     const colors = await response.result;
@@ -21,9 +23,10 @@ const loadData = async () => {
       const color = document.createElement('div');
       color.classList.add('colors');
       color.style.cssText = `background-color: rgb(${element.join(',')})`;
-      paletteContent.appendChild(color);
+      paletteColors.appendChild(color);
     });
-    paletteCard.appendChild(paletteContent);
+    paletteHeader.appendChild(paletteColors);
+    paletteCard.appendChild(paletteHeader);
     main.appendChild(paletteCard);
 
     const paletteTitle = document.createElement('div');
@@ -38,7 +41,7 @@ const loadData = async () => {
     likes.prepend(likesIcon);
     paletteTitle.appendChild(paletteName);  
     paletteTitle.appendChild(likes);
-    paletteCard.appendChild(paletteTitle);
+    paletteHeader.appendChild(paletteTitle);
         
     const commentsButton = document.createElement('span');
     commentsButton.id = 'comments-button';

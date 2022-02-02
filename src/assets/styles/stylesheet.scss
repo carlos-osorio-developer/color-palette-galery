@@ -39,7 +39,10 @@ body {
     align-items: center;
     padding: 20px;
     background-color: #4F3FFC;
-    border-bottom: 1px solid #271AB0;
+    border-bottom: 3px solid #271AB0;
+    position: fixed;
+    top: 0;
+    width: 100%;
 
     div {
       display: flex;
@@ -55,45 +58,78 @@ body {
   }
 
   main {
+    margin-top: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;  
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 20px;    
+    background-color: #958BFD;
 
     .palette-card {
-      margin: 20px;
-      padding: 20px;
+      margin: 5px;      
+      min-width: 200px;
+      min-height: 250px;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       align-items: center;
+      background-color: #302e4d;
+      
 
-      .palette-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 0 0 10px 10px;
-       
-        .colors {
-          height: 20px; 
-          width: 80px;
-        }                   
-      }
-      #palette-title {
+      .palette-header {
         width: 100%;
-        display: flex;    
-        justify-content: space-between;  
-        
-        .fa-heart {
-          margin-right: 3px;
+        background-color: #49457D;
+        border-radius: 10px 10px 0 0;
+        color: rgb(194, 194, 194);        
+
+        .palette-colors {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;        
+          margin: 20px 0;
+                    
+          .colors {
+            height: 20px; 
+            width: 80px;
+          }                   
+        }
+
+        #palette-title {
+          padding: 0 10px 10px 10px;
+          width: 100%;
+          display: flex;    
+          justify-content: space-between;            
+          
+          .fa-heart {
+            margin-right: 3px;
+            font-size: 1.2rem;
+          }
+
+          h2 {
+            font-size: 1.2rem;
+          }
+
+          p {
+            font-size: 1.2rem;            
+          }
         }
       }
 
       #comments-button {
+        margin-bottom: 20px;
+        //gives button appearance        
+        background-color: #7388E6;
+        border-radius: 10px;
+        padding: 10px;                  
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: #958BFD;
+        }
 
         .fa-comment {
           margin-right: 5px;
