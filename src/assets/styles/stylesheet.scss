@@ -65,6 +65,9 @@ body {
       margin: 20px;
       padding: 20px;
       border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
       .palette-content {
         display: flex;
@@ -81,8 +84,20 @@ body {
         }                   
       }
       #palette-title {
+        width: 100%;
         display: flex;    
-        justify-content: space-between;      
+        justify-content: space-between;  
+        
+        .fa-heart {
+          margin-right: 3px;
+        }
+      }
+
+      #comments-button {
+
+        .fa-comment {
+          margin-right: 5px;
+        }
       }
     }
   }

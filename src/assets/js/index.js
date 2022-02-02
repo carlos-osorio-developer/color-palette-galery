@@ -13,6 +13,7 @@ const loadData = async () => {
     paletteCard.classList.add('palette-card');  
     const paletteContent = document.createElement('div');
     paletteContent.classList.add('palette-content');
+
     const response = await newPalette();
     const colors = await response.result;
     // identifier = colors.flat(1).join('')
@@ -24,18 +25,28 @@ const loadData = async () => {
     });
     paletteCard.appendChild(paletteContent);
     main.appendChild(paletteCard);
+
     const paletteTitle = document.createElement('div');
     paletteTitle.id = 'palette-title';
     const paletteName = document.createElement('h2');    
     paletteName.innerText = `Palette ${i + 1}`;
     const likes = document.createElement('p');
-    likes.innerText = ': 0';
+    likes.id = 'palette-likes';
+    likes.innerText = '0';
     const likesIcon = document.createElement('i');
     likesIcon.classList.add('fas', 'fa-heart');
     likes.prepend(likesIcon);
     paletteTitle.appendChild(paletteName);  
     paletteTitle.appendChild(likes);
     paletteCard.appendChild(paletteTitle);
+        
+    const commentsButton = document.createElement('span');
+    commentsButton.id = 'comments-button';
+    commentsButton.innerText = 'Comments';
+    const commentIcon = document.createElement('i');
+    commentIcon.classList.add('fas', 'fa-comment');
+    commentsButton.prepend(commentIcon);    
+    paletteCard.appendChild(commentsButton);
 
     // main.innerHTML = `<p>${colors.flat(1).join('')}</p>`;
   }
