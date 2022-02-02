@@ -78,7 +78,11 @@ body {
         .colors {
           height: 20px; 
           width: 80px;
-        }             
+        }                   
+      }
+      #palette-title {
+        display: flex;    
+        justify-content: space-between;      
       }
     }
   }
