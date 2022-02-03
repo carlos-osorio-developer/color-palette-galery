@@ -157,13 +157,14 @@ body {
         color: #fff;
       }
 
-      .fa-times {
+      #modal-close-icon {
         cursor: pointer;
         font-size: 1.5rem;
         color: #fff;
         position: absolute;
         top: 20px;
         right: 20px;
+        z-index: 3;
       }     
       
       .palette-header {

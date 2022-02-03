@@ -64,8 +64,16 @@ const commentsModal = function(element) {
   commentsModal.id = 'comments-modal';
   const title = document.createElement('h2');
   title.innerText = 'Comment on this palette';
-  const closeIcon = document.createElement('i');
-  closeIcon.classList.add('fas', 'fa-times');         
+  const closeIcon = document.createElement('div');
+  closeIcon.id = 'modal-close-icon';
+  //delete element commentsModal when close icon is clicked
+  closeIcon.addEventListener('click', function() {    
+    const removeDiv = this.parentElement;    
+    removeDiv.parentElement.removeChild(removeDiv);
+  });
+  const xIcon = document.createElement('i');
+  xIcon.classList.add('fas', 'fa-times');
+  closeIcon.appendChild(xIcon);      
 
   const paletteHeader = element.parentElement.children[0].cloneNode(true);  
   for (let i = 0; i < 5; i++) {    
