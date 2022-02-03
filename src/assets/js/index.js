@@ -92,14 +92,13 @@ const commentsModal = function(element) {
   commentInput.id = 'comment-input';
   commentInput.type = 'text';
   commentInput.placeholder = 'Add a comment';
-  const commentButton = document.createElement('button');
+  const commentButton = document.createElement('input');
   commentButton.id = 'comment-button';
-  commentButton.type = 'submit';
-  commentButton.innerText = 'Add comment';
+  commentButton.type = 'submit';  
   commentForm.appendChild(commentInput);
-  commentForm.appendChild(commentButton);
-  comments.appendChild(commentForm);
+  commentForm.appendChild(commentButton); 
   commentsSection.appendChild(comments);
+  commentsSection.appendChild(commentForm);
   commentsModal.appendChild(commentsSection);
 
 };
