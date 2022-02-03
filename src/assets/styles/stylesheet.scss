@@ -118,9 +118,8 @@ body {
         }
       }
 
-      #comments-button {
-        margin-bottom: 20px;
-        //gives button appearance        
+      .comments-button {
+        margin-bottom: 20px;       
         background-color: #7388E6;
         border-radius: 10px;
         padding: 10px;                  
@@ -136,7 +135,71 @@ body {
         }
       }
     }
+
+    #comments-modal {      
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 70%;
+      height: 70%;
+      background-color: rgba(0, 0, 0, 0.8);
+      transform: translate(-50%, -50%);
+      border-radius: 10px;      
+      z-index: 2;
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      .fa-times {
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: #4F3FFC;
+      }     
+      
+      .palette-header {
+        width: 100%;
+        background-color: #49457D;
+        border-radius: 10px 10px 0 0;
+        color: rgb(194, 194, 194);        
+
+        .palette-colors {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;        
+          margin: 20px 0;
+                    
+          .colors {
+            height: 20px; 
+            width: 80px;
+          }                   
+        }
+
+        #palette-title {
+          padding: 0 10px 10px 10px;
+          width: 100%;
+          display: flex;    
+          justify-content: space-between;            
+          
+          .fa-heart {
+            margin-right: 3px;
+            font-size: 1.2rem;
+          }
+
+          h2 {
+            font-size: 1.2rem;
+          }
+
+          p {
+            font-size: 1.2rem;            
+          }
+        }
+      }
+    }
   }
+
+
 
   footer {
     background-color: #271AB0;
