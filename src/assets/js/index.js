@@ -8,20 +8,19 @@ import '@fortawesome/fontawesome-free/js/brands.js';
 
 const loadData = async () => {
   const main = document.getElementsByTagName('main')[0];
-  for (let i = 0; i < 6; i++) {      
+  for (let i = 0; i < 6; i++) {          
     const paletteCard = document.createElement('div');    
     paletteCard.classList.add('palette-card'); 
     const paletteHeader = document.createElement('div');
     paletteHeader.classList.add('palette-header');
     const paletteColors = document.createElement('div');
     paletteColors.classList.add('palette-colors');
-
     const response = await newPalette();
     const colors = await response.result;
     paletteCard.id = `id-${colors.flat(1).join('_')}`;    
-    colors.forEach(element => {
+    colors.forEach(element => {      
       const color = document.createElement('div');
-      color.id = `id-${element.join('-')}`;
+      color.id = `id-${element.join('_')}`;
       color.classList.add('colors');      
       color.style.cssText = `background-color: rgb(${element.join(',')})`;
       paletteColors.appendChild(color);
@@ -44,7 +43,9 @@ const loadData = async () => {
     paletteTitle.appendChild(likes);
     paletteHeader.appendChild(paletteTitle);
     likes.addEventListener('click', function() {
-      console.log('Like clicked');
+      //call userAPI to add likes
+      userAPI.postLike(paletteCard.id);
+      console.log(paletteCard.id);
     });
         
     const commentsButton = document.createElement('span');
@@ -69,7 +70,7 @@ const commentsModal = function(element) {
   title.innerText = 'Comment on this palette';
   const closeIcon = document.createElement('div');
   closeIcon.id = 'modal-close-icon';
-  //delete element commentsModal when close icon is clicked
+  
   closeIcon.addEventListener('click', function() {    
     const removeDiv = this.parentElement;    
     removeDiv.parentElement.removeChild(removeDiv);
@@ -80,7 +81,7 @@ const commentsModal = function(element) {
 
   const paletteHeader = element.parentElement.children[0].cloneNode(true);  
   for (let i = 0; i < 5; i++) {    
-    const rgbCode = paletteHeader.children[0].children[i].id.split('-');
+    const rgbCode = paletteHeader.children[0].children[i].id.split('_');
     const hexCode = rgbToHex(rgbCode[1]) + rgbToHex(rgbCode[2]) + rgbToHex(rgbCode[3]);
     const code = document.createElement('p');
     code.innerText = `#${hexCode}`;
@@ -91,8 +92,7 @@ const commentsModal = function(element) {
   commentsModal.appendChild(closeIcon);
   commentsModal.appendChild(paletteHeader);
   document.body.children[1].appendChild(commentsModal);
-
-  //add comments section
+  
   const commentsSection = document.createElement('div');
   commentsSection.id = 'comments-section';
   const comments = document.createElement('div');
