@@ -101,12 +101,7 @@ body {
           padding: 0 10px 10px 10px;
           width: 100%;
           display: flex;    
-          justify-content: space-between;            
-          
-          .fa-heart {
-            margin-right: 3px;
-            font-size: 1.2rem;
-          }
+          justify-content: space-between;                                
 
           h2 {
             font-size: 1.2rem;
@@ -114,6 +109,16 @@ body {
 
           p {
             font-size: 1.2rem;            
+
+            .fa-heart {
+              margin-right: 3px;
+              font-size: 1.4rem;
+              transition: all 0.3s ease;
+
+              &:hover {
+                color: #FC3B26;
+              }
+            }
           }
         }
       }
@@ -195,11 +200,7 @@ body {
           width: 100%;
           display: flex;
           justify-content: space-between;  
-          align-items: center;          
-          
-          .fa-heart {            
-            font-size: 1.2rem;
-          }
+          align-items: center;                               
 
           h2 {
             font-size: 1.4rem;
@@ -210,7 +211,14 @@ body {
             
             .fa-heart {
               margin-right: 4px;
+              font-size: 1.4rem;
+              transition: all 0.3s ease;
+
+              &:hover {
+                color: #FC3B26;
+              }
             }
+
           }
         }
       }

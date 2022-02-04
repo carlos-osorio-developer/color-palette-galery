@@ -43,6 +43,9 @@ const loadData = async () => {
     paletteTitle.appendChild(paletteName);  
     paletteTitle.appendChild(likes);
     paletteHeader.appendChild(paletteTitle);
+    likes.addEventListener('click', function() {
+      console.log('Like clicked');
+    });
         
     const commentsButton = document.createElement('span');
     commentsButton.classList.add('comments-button');
