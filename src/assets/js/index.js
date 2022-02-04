@@ -6,25 +6,46 @@ import '@fortawesome/fontawesome-free/js/solid.js';
 import '@fortawesome/fontawesome-free/js/regular.js';
 import '@fortawesome/fontawesome-free/js/brands.js';
 
-const loadData = async () => {
-  const main = document.getElementsByTagName('main')[0];
-  for (let i = 0; i < 6; i++) {          
-    const paletteCard = document.createElement('div');
-    paletteCard.classList.add('palette-card'); 
-    const paletteHeader = document.createElement('div');
-    paletteHeader.classList.add('palette-header');
-    const paletteColors = document.createElement('div');
-    paletteColors.classList.add('palette-colors');
+const loadData = async (n) => {
+  let likesArray = await userAPI.getLikes();
+
+  for (let i = 0; i < n; i++) {
     const response = await newPalette();
     const colors = await response.result;
-    paletteCard.id = `id-${colors.flat(1).join('_')}`;    
-    colors.forEach(element => {      
+    
+    const paletteCard = document.getElementsByClassName('palette-card')[i];
+    paletteCard.id = `id-${colors.flat(1).join('_')}`;
+    const paletteColors = document.getElementsByClassName('palette-colors')[i];
+    colors.forEach(element => {
       const color = document.createElement('div');
       color.id = `id-${element.join('_')}`;
       color.classList.add('colors');      
       color.style.cssText = `background-color: rgb(${element.join(',')})`;
       paletteColors.appendChild(color);
     });
+
+    const likes = document.getElementsByClassName('palette-likes')[i];
+    const likeSpan = document.createElement('span');
+    likesArray.forEach(element => {
+      const likesText = element.item_id === paletteCard.id ? `${element.likes}` : '0';
+      likeSpan.innerText = likesText;
+      likes.append(likeSpan);
+    });    
+  };
+        
+                          
+};
+
+const createDOM = function(n) {
+  const main = document.getElementsByTagName('main')[0];
+  for (let i = 0; i < n; i++) {
+    const paletteCard = document.createElement('div');
+    paletteCard.classList.add('palette-card'); 
+    const paletteHeader = document.createElement('div');
+    paletteHeader.classList.add('palette-header');
+    const paletteColors = document.createElement('div');
+    paletteColors.classList.add('palette-colors');
+
     paletteHeader.appendChild(paletteColors);
     paletteCard.appendChild(paletteHeader);
     main.appendChild(paletteCard);
@@ -34,18 +55,12 @@ const loadData = async () => {
     const paletteName = document.createElement('h2');
     paletteName.innerText = `Palette ${i + 1}`;
     const likes = document.createElement('p');
-    likes.id = 'palette-likes';
+    likes.classList.add('palette-likes');
     const likeSpan = document.createElement('span');
-    let likesArray = await userAPI.getLikes();
-    likesArray.forEach(element => {
-      const likesText = element.item_id === paletteCard.id ? `${element.likes}` : '0';
-      likeSpan.innerText = likesText;
-      likes.append(likeSpan);
-    });
     const likesIcon = document.createElement('i');
     likesIcon.classList.add('fas', 'fa-heart');
     likes.prepend(likesIcon);
-    
+
     paletteTitle.appendChild(paletteName);  
     paletteTitle.appendChild(likes);
     paletteHeader.appendChild(paletteTitle);
@@ -53,7 +68,7 @@ const loadData = async () => {
       userAPI.postLike(paletteCard.id);      
       updateLikes(paletteCard.id);
     });
-        
+
     const commentsButton = document.createElement('span');
     commentsButton.classList.add('comments-button');
     commentsButton.innerText = 'Comments';
@@ -63,7 +78,8 @@ const loadData = async () => {
     paletteCard.appendChild(commentsButton);  
     commentsButton.addEventListener('click', function() {
       commentsModal(this);
-    });    
+    });  
+
   };
 };
 
@@ -131,7 +147,6 @@ const commentsModal = function(element) {
   commentsSection.appendChild(comments);
   commentsSection.appendChild(commentForm);
   commentsModal.appendChild(commentsSection);
-
 };
 
 const rgbToHex = function (rgb) { 
@@ -142,4 +157,6 @@ const rgbToHex = function (rgb) {
   return hex;
 };
 
-loadData();
+loadData(6);
+createDOM(6);
+
