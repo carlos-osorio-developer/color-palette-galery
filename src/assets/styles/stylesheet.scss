@@ -156,7 +156,7 @@ body {
       align-items: center;
 
       h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         margin-top: 10px;
         text-align: center;
         color: #fff;
@@ -180,7 +180,7 @@ body {
           display: flex;
           flex-direction: column;          
           align-items: center;        
-          margin-top: 15px;
+          margin-top: 5px;
                     
           .colors {
             height: 35px; 
@@ -228,7 +228,7 @@ body {
 
         #comments {   
           overflow-y: scroll; 
-          height: 120px;      
+          height: 100px;      
         }
 
         #comment-form {
@@ -238,7 +238,7 @@ body {
           margin-top: 20px;
           width: 100%;
 
-          #comment-input {
+          #comment-input, #name-input {
             width: 60%;
             height: 40px;
             border-radius: 10px;

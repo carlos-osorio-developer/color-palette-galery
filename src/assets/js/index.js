@@ -79,7 +79,6 @@ const createDOM = function(n) {
     commentsButton.addEventListener('click', function() {
       commentsModal(this);
     });  
-
   };
 };
 
@@ -110,12 +109,7 @@ const commentsModal = function(element) {
   const paletteHeader = element.parentElement.children[0].cloneNode(true);    
   const likeBtn = paletteHeader.lastChild.lastChild.firstChild;
   const spanBtn = paletteHeader.lastChild.lastChild.lastChild;
-
-  likeBtn.addEventListener('click', function() {          
-      userAPI.postLike(element.parentElement.id);
-      updateLikes(element.parentElement.id);
-      spanBtn.innerText = `${parseInt(spanBtn.innerText) + 1}`;
-    });
+  
   for (let i = 0; i < 5; i++) {    
     const rgbCode = paletteHeader.children[0].children[i].id.split('_');
     const hexCode = rgbToHex(rgbCode[1]) + rgbToHex(rgbCode[2]) + rgbToHex(rgbCode[3]);
@@ -134,7 +128,11 @@ const commentsModal = function(element) {
   const comments = document.createElement('div');
   comments.id = 'comments';
   const commentForm = document.createElement('form');
-  commentForm.id = 'comment-form';
+  commentForm.id = 'comment-form';  
+  const nameInput = document.createElement('input');
+  nameInput.id = 'name-input';
+  nameInput.type = 'text';
+  nameInput.placeholder = 'Name';
   const commentInput = document.createElement('input');
   commentInput.id = 'comment-input';
   commentInput.type = 'text';
@@ -142,11 +140,29 @@ const commentsModal = function(element) {
   const commentButton = document.createElement('input');
   commentButton.id = 'comment-button';
   commentButton.type = 'submit';  
+  commentForm.appendChild(nameInput);
   commentForm.appendChild(commentInput);
   commentForm.appendChild(commentButton); 
   commentsSection.appendChild(comments);
   commentsSection.appendChild(commentForm);
   commentsModal.appendChild(commentsSection);
+
+  likeBtn.addEventListener('click', function() {          
+    userAPI.postLike(element.parentElement.id);
+    updateLikes(element.parentElement.id);
+    spanBtn.innerText = `${parseInt(spanBtn.innerText) + 1}`;
+  });
+
+  commentButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    if(commentInput.value !== '' && nameInput.value !== '') {
+      const name = nameInput.value;
+      const comment = commentInput.value;    
+      userAPI.postComment(element.parentElement.id, name ,comment);
+      nameInput.value = '';
+      commentInput.value = '';
+    };
+  });
 };
 
 const rgbToHex = function (rgb) { 
