@@ -35,17 +35,23 @@ const loadData = async () => {
     paletteName.innerText = `Palette ${i + 1}`;
     const likes = document.createElement('p');
     likes.id = 'palette-likes';
-    likes.innerText = '0';
+    const likeSpan = document.createElement('span');
+    let likesArray = await userAPI.getLikes();
+    likesArray.forEach(element => {
+      const likesText = element.item_id === paletteCard.id ? `${element.likes}` : '0';
+      likeSpan.innerText = likesText;
+      likes.append(likeSpan);
+    });
     const likesIcon = document.createElement('i');
     likesIcon.classList.add('fas', 'fa-heart');
     likes.prepend(likesIcon);
+    
     paletteTitle.appendChild(paletteName);  
     paletteTitle.appendChild(likes);
     paletteHeader.appendChild(paletteTitle);
-    likes.addEventListener('click', function() {
-      //call userAPI to add likes
-      userAPI.postLike(paletteCard.id);
-      console.log(paletteCard.id);
+    likes.addEventListener('click', function() {      
+      userAPI.postLike(paletteCard.id);      
+      updateLikes(paletteCard.id);
     });
         
     const commentsButton = document.createElement('span');
@@ -57,10 +63,16 @@ const loadData = async () => {
     paletteCard.appendChild(commentsButton);  
     commentsButton.addEventListener('click', function() {
       commentsModal(this);
-    }
-    );  
-  }
-  
+    });    
+  }  
+};
+
+const updateLikes = async function(id, likesArray) {
+  const likes = document.getElementById(id).firstChild.lastChild.lastChild.lastChild;
+  const likesText = likes.innerText;
+  const likesNumber = parseInt(likesText);
+  const newLikes = likesNumber + 1;
+  likes.innerText = `${newLikes}`;
 };
 
 const commentsModal = function(element) {  
@@ -122,5 +134,11 @@ const rgbToHex = function (rgb) {
   return hex;
 };
 
-loadData();
+const getLikes = async function(id) {
+  const response = await userAPI.getLikes();
+  const likes = response.result;
+  
+  return likes;
+};
 
+loadData();
