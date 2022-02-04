@@ -9,7 +9,7 @@ import '@fortawesome/fontawesome-free/js/brands.js';
 const loadData = async () => {
   const main = document.getElementsByTagName('main')[0];
   for (let i = 0; i < 6; i++) {          
-    const paletteCard = document.createElement('div');    
+    const paletteCard = document.createElement('div');
     paletteCard.classList.add('palette-card'); 
     const paletteHeader = document.createElement('div');
     paletteHeader.classList.add('palette-header');
@@ -31,7 +31,7 @@ const loadData = async () => {
 
     const paletteTitle = document.createElement('div');
     paletteTitle.id = 'palette-title';
-    const paletteName = document.createElement('h2');    
+    const paletteName = document.createElement('h2');
     paletteName.innerText = `Palette ${i + 1}`;
     const likes = document.createElement('p');
     likes.id = 'palette-likes';
@@ -64,10 +64,10 @@ const loadData = async () => {
     commentsButton.addEventListener('click', function() {
       commentsModal(this);
     });    
-  }  
+  };
 };
 
-const updateLikes = async function(id, likesArray) {
+const updateLikes = async function(id) {
   const likes = document.getElementById(id).firstChild.lastChild.lastChild.lastChild;
   const likesText = likes.innerText;
   const likesNumber = parseInt(likesText);
@@ -91,7 +91,15 @@ const commentsModal = function(element) {
   xIcon.classList.add('fas', 'fa-times');
   closeIcon.appendChild(xIcon);      
 
-  const paletteHeader = element.parentElement.children[0].cloneNode(true);  
+  const paletteHeader = element.parentElement.children[0].cloneNode(true);    
+  const likeBtn = paletteHeader.lastChild.lastChild.firstChild;
+  const spanBtn = paletteHeader.lastChild.lastChild.lastChild;
+
+  likeBtn.addEventListener('click', function() {          
+      userAPI.postLike(element.parentElement.id);
+      updateLikes(element.parentElement.id);
+      spanBtn.innerText = `${parseInt(spanBtn.innerText) + 1}`;
+    });
   for (let i = 0; i < 5; i++) {    
     const rgbCode = paletteHeader.children[0].children[i].id.split('_');
     const hexCode = rgbToHex(rgbCode[1]) + rgbToHex(rgbCode[2]) + rgbToHex(rgbCode[3]);
@@ -132,13 +140,6 @@ const rgbToHex = function (rgb) {
        hex = "0" + hex;
   }
   return hex;
-};
-
-const getLikes = async function(id) {
-  const response = await userAPI.getLikes();
-  const likes = response.result;
-  
-  return likes;
 };
 
 loadData();
