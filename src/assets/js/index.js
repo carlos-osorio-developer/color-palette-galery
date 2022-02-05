@@ -99,11 +99,16 @@ const updateLikes = async function(id) {
   likes.innerText = `${newLikes}`;
 };
 
-const getComments = async function(id) {  
+const getComments = async function(id) {    
   const comments = await userAPI.getComments(id);     
   const comSection = document.getElementById('comments');
   const NoComm = document.createElement('p');
+  // const header = comSection.parentElement.parentElement.children[2];
   NoComm.id = 'no-comments';
+  const counter = document.getElementById('comment-counter');
+  const number = comments.error ? 0 : comments.length;
+  counter.innerText = `${number} comments`;
+  // header.appendChild(counter);
  
   if (comments.error) {
     NoComm.innerText = 'No comments yet';
@@ -115,6 +120,7 @@ const getComments = async function(id) {
       addComment(element.username, element.comment, element.creation_date);
     });      
   };
+  
 };
 
 const addComment = function(name, text, date) {
@@ -164,8 +170,10 @@ const commentsModal = function(element) {
   commentsModal.appendChild(title);
   commentsModal.appendChild(closeIcon);
   commentsModal.appendChild(paletteHeader);
-  document.body.children[1].appendChild(commentsModal);
+  document.body.children[2].appendChild(commentsModal);
   
+  const commentCounter = document.createElement('p');
+  commentCounter.id = 'comment-counter';
   const commentsSection = document.createElement('div');
   commentsSection.id = 'comments-section';  
   getComments(element.parentElement.id);
@@ -191,6 +199,10 @@ const commentsModal = function(element) {
   commentsSection.appendChild(commentForm);
   commentsModal.appendChild(commentsSection);
 
+  let commentsNumber = document.getElementsByClassName('comment').length;
+  commentCounter.innerText = `${commentsNumber} comments`;
+  paletteHeader.appendChild(commentCounter);
+
   likeBtn.addEventListener('click', function() {          
     userAPI.postLike(element.parentElement.id);
     updateLikes(element.parentElement.id);
@@ -200,7 +212,6 @@ const commentsModal = function(element) {
   commentButton.addEventListener('click', function(e) {
     e.preventDefault();
     if(commentInput.value !== '' && nameInput.value !== '') {
-      console.log(comments);
       if(comments.firstChild.children.length === 0) {
         document.getElementById('no-comments').remove();
       }
@@ -209,7 +220,10 @@ const commentsModal = function(element) {
       userAPI.postComment(element.parentElement.id, name ,comment);
       nameInput.value = '';
       commentInput.value = '';      
-      const date = new Date();      
+      const date = new Date();
+      commentsNumber += 1;
+      commentCounter.innerText = `${commentsNumber} comments`;
+      paletteHeader.appendChild(commentCounter);      
       addComment(name, comment, date.toDateString());
     };
   });
