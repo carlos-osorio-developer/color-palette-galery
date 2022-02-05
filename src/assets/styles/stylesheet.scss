@@ -9,7 +9,7 @@ body {
   font-family: 'Roboto', sans-serif;  
   line-height: 1.5;
   color: #333;
-  background-color: #fff;
+  background-color: #fff;  
 
   h1 {
     font-size: 2rem;
@@ -57,14 +57,46 @@ body {
     }    
   }
 
-  main {
+  #element-gen {
+    display: flex;
     margin-top: 100px;
+    padding: 20px 0 0 10px;
+    background-color: #958BFD;          
+    transition: all 0.3s ease;
+
+    #gen-btn:hover {
+      background-color: #FCE03F;
+      cursor: pointer;
+    }
+
+    label {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    input {      
+      height: 40px;
+      border: none;      
+      border-radius: 5px;
+      margin: 0 10px; 
+      padding: 0 5px;
+      font-size: 1rem;
+      font-weight: 300;      
+      transition: all 0.3s ease;      
+    }
+
+    
+
+  }
+
+  main {
     display: flex;
     justify-content: space-between;
     align-items: center;  
     flex-wrap: wrap;
     padding: 20px;    
-    background-color: #958BFD;
+    background-color: #958BFD;    
 
     .palette-card {
       margin: 5px;      

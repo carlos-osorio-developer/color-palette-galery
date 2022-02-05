@@ -6,6 +6,15 @@ import '@fortawesome/fontawesome-free/js/solid.js';
 import '@fortawesome/fontawesome-free/js/regular.js';
 import '@fortawesome/fontawesome-free/js/brands.js';
 
+document.getElementById('gen-btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  const main = document.getElementsByTagName('main')[0];
+  main.innerHTML = '';
+  const items = document.getElementById('gen-value').value;
+  loadData(items);
+  createDOM(items);
+});
+
 const loadData = async (n) => {
   let likesArray = await userAPI.getLikes();
 
@@ -90,8 +99,7 @@ const updateLikes = async function(id) {
   likes.innerText = `${newLikes}`;
 };
 
-const getComments = async function(id) {
-  
+const getComments = async function(id) {  
   const comments = await userAPI.getComments(id);     
   const comSection = document.getElementById('comments');
   const NoComm = document.createElement('p');
