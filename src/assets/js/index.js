@@ -90,6 +90,41 @@ const updateLikes = async function(id) {
   likes.innerText = `${newLikes}`;
 };
 
+const getComments = async function(id) {
+  
+  const comments = await userAPI.getComments(id);     
+  const comSection = document.getElementById('comments');
+  const NoComm = document.createElement('p');
+  NoComm.id = 'no-comments';
+ 
+  if (comments.error) {
+    NoComm.innerText = 'No comments yet';
+    comSection.appendChild(NoComm);
+  }
+  else {
+    comSection.innerHTML = '';
+    comments.forEach(element => {
+      addComment(element.username, element.comment, element.creation_date);
+    });      
+  };
+};
+
+const addComment = function(name, text, date) {
+  const comSection = document.getElementById('comments');
+  const comment = document.createElement('div');
+  comment.classList.add('comment');
+  const commentText = document.createElement('p');
+  commentText.innerText = text;
+  const commentAuthor = document.createElement('span');
+  commentAuthor.innerText = name + ': ';
+  const commentDate = document.createElement('span');
+  commentDate.innerText = date;
+  comment.appendChild(commentAuthor);
+  comment.appendChild(commentText);      
+  comment.appendChild(commentDate);
+  comSection.appendChild(comment);
+};
+
 const commentsModal = function(element) {  
   const commentsModal = document.createElement('div');
   commentsModal.id = 'comments-modal';
@@ -124,7 +159,8 @@ const commentsModal = function(element) {
   document.body.children[1].appendChild(commentsModal);
   
   const commentsSection = document.createElement('div');
-  commentsSection.id = 'comments-section';
+  commentsSection.id = 'comments-section';  
+  getComments(element.parentElement.id);
   const comments = document.createElement('div');
   comments.id = 'comments';
   const commentForm = document.createElement('form');
@@ -156,11 +192,17 @@ const commentsModal = function(element) {
   commentButton.addEventListener('click', function(e) {
     e.preventDefault();
     if(commentInput.value !== '' && nameInput.value !== '') {
+      console.log(comments);
+      if(comments.firstChild.children.length === 0) {
+        document.getElementById('no-comments').remove();
+      }
       const name = nameInput.value;
-      const comment = commentInput.value;    
+      const comment = commentInput.value;      
       userAPI.postComment(element.parentElement.id, name ,comment);
       nameInput.value = '';
-      commentInput.value = '';
+      commentInput.value = '';      
+      const date = new Date();      
+      addComment(name, comment, date.toDateString());
     };
   });
 };
