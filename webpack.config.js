@@ -12,7 +12,7 @@ const config = {
   entry: './src/assets/js/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'images/[hash][ext][query]'
+    assetModuleFilename: 'images/[hash][ext][query]',
   },
   devServer: {
     open: true,
@@ -46,12 +46,12 @@ const config = {
       },
       {
         test: /\.html$/,
-        use: ["html-loader"],
-      },                    
+        use: ['html-loader'],
+      },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        type: 'asset/resource'
-      },      
+        type: 'asset/resource',
+      },
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],
