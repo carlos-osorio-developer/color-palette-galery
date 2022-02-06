@@ -100,7 +100,7 @@ const commentsModal = function commentsModal(element) {
   const closeIcon = document.createElement('div');
   closeIcon.id = 'modal-close-icon';
 
-  closeIcon.addEventListener('click', () => {
+  closeIcon.addEventListener('click', function closeIcon() {
     const removeDiv = this.parentElement;
     removeDiv.parentElement.removeChild(removeDiv);
   });
@@ -220,8 +220,8 @@ const createDOM = function createDOM(n) {
     const commentIcon = document.createElement('i');
     commentIcon.classList.add('fas', 'fa-comment');
     commentsButton.prepend(commentIcon);
-    paletteCard.appendChild(commentsButton);
-    commentsButton.addEventListener('click', () => {
+    paletteCard.appendChild(commentsButton);    
+    commentsButton.addEventListener('click', function commBtn() {
       commentsModal(this);
     });
   }
