@@ -14,7 +14,7 @@ document.getElementById('gen-btn').addEventListener('click', (e) => {
   main.innerHTML = '';
   const items = document.getElementById('gen-value').value;
   domFunctions.loadData(items);
-  createDOM(items);
+  domFunctions.createDOM(items);
 });
 
 domFunctions.loadData(6);

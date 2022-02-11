@@ -2,15 +2,15 @@ import { newPalette, userAPI } from '../backend/api';
 import functions from '../backend/functions';
 
 const domFunctions = {
-  async loadData (n) {
+  async loadData(n) {
     const likesArray = await userAPI.getLikes();
-  
+
     for (let i = 0; i < n; i += 1) {
       /* eslint-disable no-await-in-loop */
       const response = await newPalette();
       const colors = await response.result;
       /* eslint-enable no-await-in-loop */
-  
+
       const paletteCard = document.getElementsByClassName('palette-card')[i];
       paletteCard.id = `id-${colors.flat(1).join('_')}`;
       const paletteColors = document.getElementsByClassName('palette-colors')[i];
@@ -21,7 +21,7 @@ const domFunctions = {
         color.style.cssText = `background-color: rgb(${element.join(',')})`;
         paletteColors.appendChild(color);
       });
-  
+
       const likes = document.getElementsByClassName('palette-likes')[i];
       const likeSpan = document.createElement('span');
       likesArray.forEach((element) => {
@@ -66,7 +66,7 @@ const domFunctions = {
     const number = comments.error ? 0 : comments.length;
     counter.innerText = `${number} comments`;
     // header.appendChild(counter);
-  
+
     if (comments.error) {
       NoComm.innerText = 'No comments yet';
       comSection.appendChild(NoComm);
@@ -85,7 +85,7 @@ const domFunctions = {
     title.innerText = 'Comment on this palette';
     const closeIcon = document.createElement('div');
     closeIcon.id = 'modal-close-icon';
-  
+
     closeIcon.addEventListener('click', function closeIcon() {
       const removeDiv = this.parentElement;
       removeDiv.parentElement.removeChild(removeDiv);
@@ -93,11 +93,11 @@ const domFunctions = {
     const xIcon = document.createElement('i');
     xIcon.classList.add('fas', 'fa-times');
     closeIcon.appendChild(xIcon);
-  
+
     const paletteHeader = element.parentElement.children[0].cloneNode(true);
     const likeBtn = paletteHeader.lastChild.lastChild.firstChild;
     const spanBtn = paletteHeader.lastChild.lastChild.lastChild;
-  
+
     for (let i = 0; i < 5; i += 1) {
       const rgbCode = paletteHeader.children[0].children[i].id.split('_');
       const hexCode = functions.rgbToHex(rgbCode[1])
@@ -107,12 +107,12 @@ const domFunctions = {
       code.innerText = `#${hexCode}`;
       paletteHeader.children[0].children[i].appendChild(code);
     }
-  
+
     commentsModal.appendChild(title);
     commentsModal.appendChild(closeIcon);
     commentsModal.appendChild(paletteHeader);
     document.body.children[2].appendChild(commentsModal);
-  
+
     const commentCounter = document.createElement('p');
     commentCounter.id = 'comment-counter';
     const commentsSection = document.createElement('div');
@@ -139,17 +139,17 @@ const domFunctions = {
     commentsSection.appendChild(comments);
     commentsSection.appendChild(commentForm);
     commentsModal.appendChild(commentsSection);
-  
+
     let commentsNumber = document.getElementsByClassName('comment').length;
     commentCounter.innerText = `${commentsNumber} comments`;
     paletteHeader.appendChild(commentCounter);
-  
+
     likeBtn.addEventListener('click', () => {
       userAPI.postLike(element.parentElement.id);
       domFunctions.updateLikes(element.parentElement.id);
       spanBtn.innerText = `${parseInt(spanBtn.innerText, 10) + 1}`;
     });
-  
+
     commentButton.addEventListener('click', (e) => {
       e.preventDefault();
       if (commentInput.value !== '' && nameInput.value !== '') {
@@ -179,11 +179,11 @@ const domFunctions = {
       paletteHeader.classList.add('palette-header');
       const paletteColors = document.createElement('div');
       paletteColors.classList.add('palette-colors');
-  
+
       paletteHeader.appendChild(paletteColors);
       paletteCard.appendChild(paletteHeader);
       main.appendChild(paletteCard);
-  
+
       const paletteTitle = document.createElement('div');
       paletteTitle.id = 'palette-title';
       const paletteName = document.createElement('h2');
@@ -193,7 +193,7 @@ const domFunctions = {
       const likesIcon = document.createElement('i');
       likesIcon.classList.add('fas', 'fa-heart');
       likes.prepend(likesIcon);
-  
+
       paletteTitle.appendChild(paletteName);
       paletteTitle.appendChild(likes);
       paletteHeader.appendChild(paletteTitle);
@@ -201,7 +201,7 @@ const domFunctions = {
         userAPI.postLike(paletteCard.id);
         domFunctions.updateLikes(paletteCard.id);
       });
-  
+
       const commentsButton = document.createElement('span');
       commentsButton.classList.add('comments-button');
       commentsButton.innerText = 'Comments';
@@ -215,6 +215,6 @@ const domFunctions = {
     }
   },
 
-}
+};
 
 export default domFunctions;
