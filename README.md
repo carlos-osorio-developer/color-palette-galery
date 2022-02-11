@@ -6,9 +6,6 @@ You can check different color palettes, like or comment on them, and reserve the
 
 Let your creativity flow with this colorful tool!
 
-## Live Demo
-
-[Color Palette Galery]()
 
 ## Built With
 
