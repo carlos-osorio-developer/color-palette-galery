@@ -8,4 +8,4 @@ const functions = {
   },
 };
 
-export default { functions };
+export default functions;
