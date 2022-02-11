@@ -73,7 +73,7 @@ const domFunctions = {
     } else {
       comSection.innerHTML = '';
       comments.forEach((element) => {
-        addComment(element.username, element.comment, element.creation_date);
+        domFunctions.addComment(element.username, element.comment, element.creation_date);
       });
     }
   },
@@ -146,7 +146,7 @@ const domFunctions = {
   
     likeBtn.addEventListener('click', () => {
       userAPI.postLike(element.parentElement.id);
-      updateLikes(element.parentElement.id);
+      domFunctions.updateLikes(element.parentElement.id);
       spanBtn.innerText = `${parseInt(spanBtn.innerText, 10) + 1}`;
     });
   
@@ -165,7 +165,7 @@ const domFunctions = {
         commentsNumber += 1;
         commentCounter.innerText = `${commentsNumber} comments`;
         paletteHeader.appendChild(commentCounter);
-        addComment(name, comment, date.toDateString());
+        domFunctions.addComment(name, comment, date.toDateString());
       }
     });
   },
@@ -199,7 +199,7 @@ const domFunctions = {
       paletteHeader.appendChild(paletteTitle);
       likes.addEventListener('click', () => {
         userAPI.postLike(paletteCard.id);
-        updateLikes(paletteCard.id);
+        domFunctions.updateLikes(paletteCard.id);
       });
   
       const commentsButton = document.createElement('span');
