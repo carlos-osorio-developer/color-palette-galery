@@ -1,4 +1,5 @@
-import { newPalette, userAPI } from './api';
+import { newPalette, userAPI } from './backend/api';
+import functions from './backend/functions';
 import '../styles/stylesheet.scss';
 
 /* eslint-disable */
@@ -7,14 +8,6 @@ import '@fortawesome/fontawesome-free/js/solid.js';
 import '@fortawesome/fontawesome-free/js/regular.js';
 import '@fortawesome/fontawesome-free/js/brands.js';
 /* eslint-enable */
-
-const rgbToHex = function rgbToHex(rgb) {
-  let hex = Number(rgb).toString(16);
-  if (hex.length < 2) {
-    hex = `0${hex}`;
-  }
-  return hex;
-};
 
 const loadData = async (n) => {
   const likesArray = await userAPI.getLikes();
@@ -114,7 +107,9 @@ const commentsModal = function commentsModal(element) {
 
   for (let i = 0; i < 5; i += 1) {
     const rgbCode = paletteHeader.children[0].children[i].id.split('_');
-    const hexCode = rgbToHex(rgbCode[1]) + rgbToHex(rgbCode[2]) + rgbToHex(rgbCode[3]);
+    const hexCode = functions.rgbToHex(rgbCode[1])
+    + functions.rgbToHex(rgbCode[2])
+    + functions.rgbToHex(rgbCode[3]);
     const code = document.createElement('p');
     code.innerText = `#${hexCode}`;
     paletteHeader.children[0].children[i].appendChild(code);
@@ -220,7 +215,7 @@ const createDOM = function createDOM(n) {
     const commentIcon = document.createElement('i');
     commentIcon.classList.add('fas', 'fa-comment');
     commentsButton.prepend(commentIcon);
-    paletteCard.appendChild(commentsButton);    
+    paletteCard.appendChild(commentsButton);
     commentsButton.addEventListener('click', function commBtn() {
       commentsModal(this);
     });

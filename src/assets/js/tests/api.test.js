@@ -1,4 +1,4 @@
-import { newPalette, userAPI } from '../api';
+import { newPalette, userAPI } from '../backend/api';
 
 describe('Testing API functions', () => {
   test('Returns a response', () => {
