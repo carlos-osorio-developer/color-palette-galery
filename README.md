@@ -78,10 +78,6 @@ Contributions, issues, and feature requests are welcome!
 Give a ⭐️ if you like this project or if it's useful to you!
 
 
-## Acknowledgments
-
-- Microverse ( https://www.microverse.org/ )
-
 ## 📝 License
 
 This project is [MIT](./MIT.md) licensed.
